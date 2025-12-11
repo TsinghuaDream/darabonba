@@ -16,7 +16,7 @@ class StreamTest extends TestCase
 
     public function getStream()
     {
-        return new Stream(fopen('http://httpbin.org/get', 'r'));
+        return new Stream(fopen('https://jsonplaceholder.typicode.com/posts/1', 'r'));
     }
 
     public function testReadAsBytes()
@@ -34,6 +34,7 @@ class StreamTest extends TestCase
     public function testReadAsJSON()
     {
         $result = StreamUtil::readAsJSON($this->getStream());
-        $this->assertEquals('http://httpbin.org/get', $result['url']);
+        $this->assertEquals(1, $result['userId']);
+        $this->assertEquals(1, $result['id']);
     }
 }

@@ -121,9 +121,10 @@ class DaraTest extends TestCase
         while ($count > 0) {
             $request                  = new Request();
             $request->method          = 'GET';
-            $request->protocol        = 'http';
-            $request->headers['host'] = 'example.com';
-            $request->port            = 80;
+            $request->protocol        = 'https';
+            $request->headers['host'] = 'jsonplaceholder.typicode.com';
+            $request->pathname        = '/posts/1';
+            $request->port            = 443;
             Dara::send($request);
             --$count;
         }

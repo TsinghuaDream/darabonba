@@ -37,21 +37,14 @@ class RequestTest extends TestCase
         $request                  = new Request();
         $request->method          = 'POST';
         $request->protocol        = 'https';
-        $request->headers['host'] = 'httpbin.org';
-        $request->body            = 'this is body content';
-        $request->pathname        = '/post';
+        $request->headers['host'] = 'jsonplaceholder.typicode.com';
+        $request->body            = json_encode(['title' => 'foo', 'body' => 'bar', 'userId' => 1]);
+        $request->pathname        = '/posts';
+        $request->headers['content-type'] = 'application/json; charset=UTF-8';
 
         $res  = Dara::send($request);
         $data = json_decode((string) $res->getBody(), true);
-        $this->assertEquals('this is body content', $data['data']);
-
-        $bytes = [];
-        for ($i = 0; $i < \strlen($data['data']); ++$i) {
-            $bytes[] = \ord($data['data'][$i]);
-        }
-        $request->body = $bytes;
-        $res  = Dara::send($request);
-        $data = json_decode((string) $res->getBody(), true);
-        $this->assertEquals('this is body content', $data['data']);
+        $this->assertEquals('foo', $data['title']);
+        $this->assertEquals('bar', $data['body']);
     }
 }

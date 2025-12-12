@@ -5,7 +5,7 @@ namespace AlibabaCloud\Dara\Util;
 use Psr\Http\Message\StreamInterface;
 
 /**
- * PHP 7.0+ version with return type declarations for PSR-7 v2.0 compatibility
+ * PHP 7.1+ version with return type declarations for PSR-7 v2.0 compatibility
  * @internal
  * @coversNothing
  */
@@ -13,6 +13,7 @@ class FileFormStreamTyped implements StreamInterface
 {
     use FileFormStreamTrait;
 
+    public function __toString(): string { return $this->__toStringImpl(); }
     public function getContents(): string { return $this->getContentsImpl(); }
     public function close(): void { $this->closeImpl(); }
     public function detach() { return $this->detachImpl(); }

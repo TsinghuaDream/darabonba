@@ -59,7 +59,7 @@ trait FileFormStreamTrait
     /**
      * @return string
      */
-    public function __toString()
+    protected function __toStringImpl()
     {
         try {
             $this->seek(0);
